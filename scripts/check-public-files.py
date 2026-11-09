@@ -34,7 +34,7 @@ def private_path(path: Path) -> bool:
             or path.suffix.lower() in PRIVATE_SUFFIXES
             or (name.startswith(".env") and not name.endswith(".example"))
             or name.startswith(("id_rsa", "id_ed25519", "known_hosts"))
-            or name in {"credentials", ".git-credentials"})
+            or name in {"credentials", ".git-credentials", "security-review.md", "publishing.md"})
 
 
 def source_files(root: Path = ROOT) -> list[Path]:

@@ -10,7 +10,8 @@ export function TutorialCoach({ index, onAdvance, onExit }: {
   index: number; onAdvance: (id: string) => void; onExit: () => void
 }) {
   const step = TUTORIAL_STEPS[index]
-  const [anchor, setAnchor] = useState<Anchor | null>(null)
+  const [measuredAnchor, setAnchor] = useState<Anchor | null>(null)
+  const anchor = measuredAnchor?.element.isConnected && measuredAnchor.element.dataset.tour === step.target ? measuredAnchor : null
   const [tipHeight, setTipHeight] = useState(230)
   const card = useRef<HTMLDivElement>(null)
   const callbacks = useRef({ onAdvance, onExit })
@@ -87,18 +88,19 @@ export function TutorialCoach({ index, onAdvance, onExit }: {
   const container = anchor?.element.closest('dialog[open]')
     ?? Array.from(document.querySelectorAll('dialog[open]')).at(-1) ?? document.body
   useLayoutEffect(() => {
-    if (!card.current) return
-    const observer = new ResizeObserver(() => {
-      if (card.current) setTipHeight(Math.ceil(card.current.getBoundingClientRect().height))
-    })
-    observer.observe(card.current)
-    setTipHeight(Math.ceil(card.current.getBoundingClientRect().height))
+    const tip = card.current
+    if (!tip) return
+    const measure = () => setTipHeight(Math.ceil(Math.max(tip.getBoundingClientRect().height, tip.scrollHeight + tip.offsetHeight - tip.clientHeight)))
+    const observer = new ResizeObserver(measure)
+    observer.observe(tip)
+    measure()
     return () => observer.disconnect()
-  }, [container, step.id])
+  }, [container, step.id, !!anchor])
 
   const vw = anchor?.vw ?? window.innerWidth
   const vh = anchor?.vh ?? window.innerHeight
-  const width = Math.min(340, vw - 24)
+  let width = Math.min(340, vw - 24)
+  let maxHeight = vh - 24
   const hole = anchor ? {
     left: clamp(anchor.left - 6, 0, vw), top: clamp(anchor.top - 6, 0, vh),
     right: clamp(anchor.right + 6, 0, vw), bottom: clamp(anchor.bottom + 6, 0, vh),
@@ -107,11 +109,23 @@ export function TutorialCoach({ index, onAdvance, onExit }: {
   let top: number
   if (vh - hole.bottom >= tipHeight + 24) top = hole.bottom + 12
   else if (hole.top >= tipHeight + 24) top = hole.top - tipHeight - 12
-  else if (hole.left >= width + 24) { left = hole.left - width - 12; top = clamp((hole.top + hole.bottom - tipHeight) / 2, 12, vh - tipHeight - 12) }
-  else if (vw - hole.right >= width + 24) { left = hole.right + 12; top = clamp((hole.top + hole.bottom - tipHeight) / 2, 12, vh - tipHeight - 12) }
-  else top = hole.top > vh / 2 ? 12 : Math.max(12, vh - tipHeight - 12)
+  else if (hole.left >= 204) {
+    width = Math.min(width, hole.left - 24)
+    left = hole.left - width - 12
+    top = clamp((hole.top + hole.bottom - tipHeight) / 2, 12, vh - tipHeight - 12)
+  } else if (vw - hole.right >= 204) {
+    width = Math.min(width, vw - hole.right - 24)
+    left = hole.right + 12
+    top = clamp((hole.top + hole.bottom - tipHeight) / 2, 12, vh - tipHeight - 12)
+  } else if (hole.top > vh - hole.bottom) {
+    maxHeight = Math.max(1, hole.top - 24)
+    top = hole.top - Math.min(tipHeight, maxHeight) - 12
+  } else {
+    maxHeight = Math.max(1, vh - hole.bottom - 24)
+    top = hole.bottom + 12
+  }
 
-  return createPortal(
+  return anchor ? createPortal(
     <div className="tutorial-layer" data-testid="tutorial-layer">
       <div className="tutorial-shade" style={{ left: 0, top: 0, width: vw, height: hole.top }} />
       <div className="tutorial-shade" style={{ left: 0, top: hole.bottom, width: vw, height: vh - hole.bottom }} />
@@ -119,12 +133,12 @@ export function TutorialCoach({ index, onAdvance, onExit }: {
       <div className="tutorial-shade" style={{ left: hole.right, top: hole.top, width: vw - hole.right, height: hole.bottom - hole.top }} />
       {anchor && <div className="tutorial-ring" aria-hidden="true" style={{ left: hole.left, top: hole.top, width: hole.right - hole.left, height: hole.bottom - hole.top }} />}
       <div className="tutorial-card" ref={card} role="region" aria-label="Подсказка обучения" aria-live="polite" aria-atomic="true"
-        data-testid="tutorial-card" style={{ left, top, width }}>
+        data-testid="tutorial-card" style={{ left, top, width, maxHeight }}>
         <div className="tutorial-card-heading"><span><GraduationCap size={17} />Шаг {index + 1} из {TUTORIAL_STEPS.length}</span>
           <button className="icon-button" type="button" aria-label="Выйти из обучения" onClick={onExit}><X size={18} /></button></div>
         <h2>{step.title}</h2><p>{step.text}</p>
         <div className="tutorial-safety">Учебная партия · твой герой сохранён</div>
       </div>
     </div>, container,
-  )
+  ) : null
 }

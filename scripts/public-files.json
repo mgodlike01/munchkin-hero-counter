@@ -4,7 +4,7 @@
     "src", "public", "scripts", "tests", "deploy",
     "package.json", "package-lock.json", "tsconfig.json", "vite.config.ts",
     "playwright.config.ts", "index.html", "Dockerfile", "docker-compose.yml",
-    "README.md", "SECURITY-REVIEW.md", "INSTALL.md", "PUBLISHING.md"
+    "README.md", "INSTALL.md"
   ],
   "optionalSource": ["LICENSE", "NOTICE"],
   "installer": [

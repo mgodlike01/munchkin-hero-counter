@@ -143,7 +143,7 @@ input { min-width: 0; user-select: text; }
 .modal[open] { animation: modal-arrive .18s ease-out; }
 .modal-compact { max-width: 430px; }
 .modal-body { padding: 20px 24px 24px; }
-.modal-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.modal-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; z-index: 2; background: var(--surface); }
 .modal-heading h2 { font-family: var(--font-display); font-size: 29px; line-height: 1.1; color: var(--text); }
 .modal-heading .icon-button { margin-right: -10px; flex-shrink: 0; }
 .settings-intro { margin: 2px 0 20px; font-size: 11px; color: var(--muted); }

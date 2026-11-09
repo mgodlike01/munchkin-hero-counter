@@ -38,7 +38,7 @@ for (const [width, height, theme] of [[320, 568, 'light'], [390, 844, 'dark'], [
       expect(box!.y + box!.height).toBeLessThanOrEqual(height)
       const overlap = Math.max(0, Math.min(box!.x + box!.width, button!.x + button!.width) - Math.max(box!.x, button!.x))
         * Math.max(0, Math.min(box!.y + box!.height, button!.y + button!.height) - Math.max(box!.y, button!.y))
-      expect(overlap).toBe(0)
+      expect(overlap, `Step ${index + 1}: tooltip must leave ${targets[index]} accessible`).toBe(0)
       expect(await page.evaluate(() => localStorage.getItem('munchkin.hero.v1'))).toBe(saved)
       if (index === 0 || index === 3 || index === 5) await page.screenshot({ path: `test-results/tutorial-${width}-step-${index + 1}.png` })
       await target.click()
