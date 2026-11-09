@@ -48,7 +48,7 @@ def main() -> None:
     public_check.check(site_files)
     manifest = json.loads(public_check.MANIFEST.read_text("utf-8"))
     release = {name: (ROOT / "deploy/ip" / name).read_bytes() for name in manifest["installer"]}
-    release["INSTALL.md"] = (ROOT / "INSTALL.md").read_bytes()
+    release["INSTALL.md"] = (ROOT / "deploy/INSTALL.md").read_bytes()
     for name in manifest.get("optionalSource", []):
         if (ROOT / name).is_file():
             release[name] = (ROOT / name).read_bytes()

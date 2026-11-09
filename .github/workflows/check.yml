@@ -33,6 +33,6 @@ jobs:
           python3 scripts/verify-packages.py
       - name: Installer checks in a disposable container
         run: |
-          docker build -f deploy/ip/test.Dockerfile -t munchkin-installer-check .
+          docker build -f deploy/ip/test.Dockerfile -t munchkin-installer-check deploy/ip
           docker run --rm --network none -v "$PWD/deploy/ip:/config:ro" -v "$PWD/dist:/release:ro" munchkin-installer-check bash /config/test-secure-update.sh
           docker run --rm --network none -v "$PWD/deploy/ip:/config:ro" -v "$PWD/artifacts:/packages:ro" munchkin-installer-check python3 /config/test-setup.py

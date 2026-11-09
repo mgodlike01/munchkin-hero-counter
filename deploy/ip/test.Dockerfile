@@ -5,7 +5,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     bash ca-certificates curl iproute2 openssl python3 systemd \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=caddy /usr/bin/caddy /opt/munchkin-hero/bin/caddy
-COPY deploy/ip /checks
+COPY . /checks
 RUN bash -n /checks/install-ip.sh \
     && bash -n /checks/setup.sh \
     && bash -n /checks/uninstall.sh \

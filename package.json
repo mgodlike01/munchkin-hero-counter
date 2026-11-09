@@ -9,7 +9,7 @@
     "typecheck": "tsc -b",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test --config tests/playwright.config.ts",
     "icons": "node scripts/generate-icons.mjs",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview --host 0.0.0.0",

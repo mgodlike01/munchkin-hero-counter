@@ -43,7 +43,7 @@ class PublicFilesTests(unittest.TestCase):
                 self.assertNotIn(value, "\n".join(errors))
 
     def test_private_files_rejected(self):
-        for name in (".env", ".env.production", ".ssh/config", "artifacts/backup.zip", "site/server.key", "SECURITY-REVIEW.md", "PUBLISHING.md"):
+        for name in (".env", ".env.production", ".npmrc", ".ssh/config", "artifacts/backup.zip", "site/server.key", "SECURITY-REVIEW.md", "PUBLISHING.md"):
             with self.subTest(name=name):
                 self.assertTrue(self.inspect("not a real secret", name))
 

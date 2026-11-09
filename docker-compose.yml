@@ -1,8 +1,0 @@
-services:
-  app:
-    build: .
-    restart: unless-stopped
-    ports:
-      - "127.0.0.1:${MUNCHKIN_HTTP_PORT:-8080}:80"
-    security_opt:
-      - no-new-privileges:true
