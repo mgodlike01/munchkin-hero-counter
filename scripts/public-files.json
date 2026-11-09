@@ -1,0 +1,15 @@
+{
+  "source": [
+    ".github", ".gitattributes", ".gitignore", ".dockerignore", ".npmrc",
+    "src", "public", "scripts", "tests", "deploy",
+    "package.json", "package-lock.json", "tsconfig.json", "vite.config.ts",
+    "playwright.config.ts", "index.html", "Dockerfile", "docker-compose.yml",
+    "README.md", "SECURITY-REVIEW.md", "INSTALL.md", "PUBLISHING.md"
+  ],
+  "optionalSource": ["LICENSE", "NOTICE"],
+  "installer": [
+    "setup.sh", "install-ip.sh", "update-ip.sh", "secure-update-ip.sh",
+    "uninstall.sh", "Caddyfile.template", "Caddyfile.legacy.template",
+    "munchkin-hero.service", "README.md"
+  ]
+}

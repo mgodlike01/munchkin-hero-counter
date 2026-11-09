@@ -1,0 +1,17 @@
+# Add this server block to the EXISTING Nginx http context only if Nginx
+# already owns port 443. Do not start a second listener in front of Xray.
+# Replace domain/certificate paths. Keep all existing server blocks intact.
+server {
+    listen 443 ssl;
+    server_name hero.example.com;
+
+    ssl_certificate /etc/letsencrypt/live/hero.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/hero.example.com/privkey.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:18080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}

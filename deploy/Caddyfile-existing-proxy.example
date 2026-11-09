@@ -1,0 +1,6 @@
+# Add this block to an EXISTING Caddy config only if Caddy already owns
+# port 443. Keep the existing configuration and Xray routes intact.
+hero.example.com {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:18080
+}

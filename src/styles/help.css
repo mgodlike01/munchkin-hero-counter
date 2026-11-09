@@ -1,0 +1,51 @@
+.tutorial-invitation { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 18px; margin-bottom: 16px; border: 1.5px dashed var(--line-strong); border-radius: 8px; background: var(--surface); }
+.tutorial-invitation h2 { display: flex; align-items: center; gap: 8px; color: var(--gold); font-family: var(--font-display); font-size: 25px; font-weight: 400; }
+.tutorial-invitation p { color: var(--muted); font-size: 11px; line-height: 1.7; margin-top: 4px; }
+.tutorial-invitation-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.settings-help-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; padding-top: 15px; border-top: 1px solid var(--line); }
+.settings-help-actions button { min-width: 0; padding: 10px 6px; font-size: 11px; }
+.documentation-intro { display: flex; align-items: flex-start; gap: 9px; margin: 17px 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.documentation-intro svg { flex-shrink: 0; color: var(--gold); margin-top: 2px; }
+.documentation-complete { padding: 12px; border: 1px solid var(--green); border-radius: 7px; background: var(--green-bg); color: var(--green); font-size: 12px; line-height: 1.7; margin: 16px 0; }
+.documentation-sections details { border-top: 1px solid var(--line-strong); }
+.documentation-sections details:last-child { border-bottom: 1px solid var(--line-strong); }
+.documentation-sections summary { min-height: 48px; padding: 12px 0; font-family: var(--font-display); font-size: 22px; line-height: 1.2; color: var(--text); cursor: pointer; overflow-wrap: anywhere; }
+.documentation-sections details[open] summary { color: var(--gold); }
+.documentation-copy { padding: 0 0 18px; color: var(--muted); font-size: 12px; line-height: 1.9; }
+.documentation-copy p + p, .documentation-copy p + ul, .documentation-copy p + ol, .documentation-copy ul + p, .documentation-copy ol + p { margin-top: 10px; }
+.documentation-copy strong { color: var(--text); font-weight: 600; }
+.documentation-copy ul, .documentation-copy ol { padding-left: 20px; margin: 0; }
+.documentation-copy ul { list-style: disc; }
+.documentation-copy ol { list-style: decimal; }
+.documentation-copy li + li { margin-top: 7px; }
+.documentation-tutorial { width: 100%; margin-top: 20px; }
+:root[data-tour-active] .modal[open] { animation: none; }
+.tour-target { scroll-margin: 16px; }
+.tutorial-layer { position: fixed; inset: 0; z-index: 1000; pointer-events: none; }
+.tutorial-shade { position: fixed; background: #100c08ae; pointer-events: auto; touch-action: none; }
+.tutorial-ring { position: fixed; border: 2px solid var(--gold); border-radius: 9px; box-shadow: 0 0 0 3px var(--surface); pointer-events: none; }
+.tutorial-card { position: fixed; padding: 12px 16px 14px; max-height: calc(100dvh - 24px); overflow: auto; overscroll-behavior: contain; background: var(--surface); color: var(--text); border: 2px solid var(--line-strong); border-radius: 8px 12px 8px 11px; box-shadow: 0 8px 30px #0005; pointer-events: auto; }
+.tutorial-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tutorial-card-heading > span { display: flex; align-items: center; gap: 7px; color: var(--gold); font-size: 11px; font-weight: 600; }
+.tutorial-card-heading .icon-button { margin: -7px -9px -3px 0; }
+.tutorial-card h2 { font-family: var(--font-display); font-weight: 400; font-size: 27px; line-height: 1.15; margin: 5px 0 8px; }
+.tutorial-card > p { color: var(--text); font-size: 12px; line-height: 1.75; }
+.tutorial-safety { color: var(--muted); border-top: 1px solid var(--line); padding-top: 9px; margin-top: 11px; font-size: 10px; line-height: 1.5; }
+@media (max-width: 760px) {
+  .tutorial-invitation { flex-direction: column; align-items: stretch; gap: 10px; padding: 13px; margin: 0 0 12px; }
+  .tutorial-invitation h2 { font-size: 23px; }
+  .tutorial-invitation-actions button { flex: 1; }
+}
+@media (max-width: 360px) {
+  .settings-help-actions { gap: 6px; }
+  .settings-help-actions button { font-size: 10px; gap: 5px; }
+  .documentation-sections summary { font-size: 20px; }
+  .tutorial-card { padding: 10px 13px 12px; }
+  .tutorial-card h2 { font-size: 25px; }
+}
+@media (max-height: 450px) {
+  .tutorial-card { padding-top: 8px; padding-bottom: 10px; }
+  .tutorial-card h2 { font-size: 23px; margin: 3px 0 6px; }
+  .tutorial-card > p { font-size: 11px; line-height: 1.6; }
+  .tutorial-safety { margin-top: 7px; padding-top: 7px; }
+}

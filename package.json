@@ -1,0 +1,50 @@
+{
+  "name": "munchkin-hero-counter",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "typecheck": "tsc -b",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "icons": "node scripts/generate-icons.mjs",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "audit": "npm audit --audit-level=moderate",
+    "privacy:check": "python scripts/check-public-files.py",
+    "package:vps": "python scripts/package-vps.py",
+    "check": "npm run test && npm run build"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.2.0",
+    "@fontsource/cormorant-garamond": "^5.2.0",
+    "lucide-react": "^0.577.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.0",
+    "@tailwindcss/vite": "^4.2.0",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.1.0",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.2.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.0",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^4.0.0",
+    "workbox-window": "^7.4.0"
+  },
+  "overrides": {
+    "workbox-build": {
+      "glob": "^14.0.3",
+      "@trickfilm400/rollup-plugin-off-main-thread": "^4.0.0"
+    },
+    "minimatch": "^11.0.4"
+  }
+}

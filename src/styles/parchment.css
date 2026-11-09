@@ -1,0 +1,124 @@
+/* Printed adventure cards: visual treatment, independent of game/layout rules. */
+:root {
+  --font-display: 'Neucha', 'Cormorant Garamond', Georgia, serif;
+  --bg: #242522;
+  --surface: #2c2d29;
+  --surface-raised: #363731;
+  --surface-hover: #41423a;
+  --text: #d1d0c5;
+  --muted: #aaaca1;
+  --faint: #96988d;
+  --line: #b4b6a51a;
+  --line-strong: #878b8066;
+  --gold: #aaa48f;
+  --gold-bright: #bcb59e;
+  --gold-tint: #b4b09a08;
+  --green: #9da98b;
+  --green-bg: #9da98b0c;
+  --red: #ba9389;
+  --red-bg: #ba93890a;
+  --shadow: 0 3px 10px #00000018;
+}
+
+:root[data-theme='light'] {
+  --bg: #f2e4c5;
+  --surface: #fff3d5;
+  --surface-raised: #f0dfb9;
+  --surface-hover: #e7cfa2;
+  --text: #3d2b20;
+  --muted: #6d513c;
+  --faint: #775e46;
+  --line: #70503730;
+  --line-strong: #70503799;
+  --gold: #a53626;
+  --gold-bright: #a52d20;
+  --gold-tint: #a536260a;
+  --green: #4c652f;
+  --green-bg: #6983440e;
+  --red: #9e3327;
+  --red-bg: #b4463210;
+  --shadow: 4px 5px 0 #6b482b30;
+}
+
+body {
+  background: radial-gradient(ellipse at 50% 0, var(--gold-tint), transparent 65%),
+    repeating-linear-gradient(0deg, #98713c05 0, #98713c05 1px, transparent 1px, transparent 4px), var(--bg);
+}
+.app-header { padding-bottom: 20px; border-bottom: 2px solid var(--line-strong); }
+.brand-mark { width: 52px; height: 52px; flex-shrink: 0; transform: rotate(-4deg); }
+.brand-mark img { display: block; width: 100%; height: 100%; border: 2px solid var(--text); border-radius: 9px 12px 8px 11px; }
+.brand h1 { font-size: 34px; line-height: 1.1; font-weight: 400; }
+.brand-eyebrow { letter-spacing: .22em; }
+.page-intro h2 { font-size: clamp(40px, 4.5vw, 54px); font-weight: 400; }
+.page-intro h2 em { display: inline-block; transform: rotate(-3deg); border-bottom: 3px solid var(--gold); }
+.panel { border-width: 2px; border-radius: 7px 12px 8px 10px; }
+.hero-panel { border-top-color: var(--gold); }
+.section-eyebrow h2 { font-family: var(--font-display); font-size: 23px; font-weight: 400; letter-spacing: .01em; }
+.power-number { font-weight: 800; letter-spacing: -.055em; }
+.hero-decoration { right: 30px; top: 28px; height: 116px; opacity: .85; transform: rotate(7deg); }
+.hero-decoration img { display: block; width: 116px; height: 116px; border-radius: 12px; border: 2px solid var(--line-strong); }
+.stat-description h3 { font-family: var(--font-display); font-size: 21px; font-weight: 400; }
+.reset-modifier { width: 44px; min-width: 44px; height: 44px; color: var(--gold); border: 1px solid var(--line); background: var(--gold-tint); }
+.step-button { border-width: 1.5px; border-radius: 5px 7px 5px 6px; box-shadow: 1px 2px 0 var(--line); }
+.step-button:hover:not(:disabled) { border-color: var(--gold); }
+.modal { border-width: 2px; border-radius: 8px 13px 9px 12px; box-shadow: 6px 7px 0 #1e120c40, 0 20px 100px #0006; }
+.modal-heading h2 { font-size: 34px; font-weight: 400; }
+.setting-copy label { font-family: var(--font-display); font-size: 20px; font-weight: 400; }
+.edition-selector button { font-family: var(--font-display); font-size: 19px; line-height: 1.3; }
+.secondary-button, .primary-button { border-width: 1.5px; border-radius: 5px 8px 5px 7px; font-size: 12px; font-weight: 700; box-shadow: 2px 3px 0 var(--line); }
+.primary-button { border-color: var(--text); }
+.new-game-button { border: 1.5px solid var(--line-strong); border-radius: 5px 8px 5px 7px; font-weight: 700; box-shadow: 2px 3px 0 var(--line); }
+.gear-tile { border-width: 1.5px; border-radius: 5px 8px 5px 7px; box-shadow: 1px 2px 0 var(--line); }
+.gear-tile h3 { font-family: var(--font-display); font-size: 19px; font-weight: 400; color: var(--text); line-height: 1.3; }
+.gear-step { border-color: var(--line); border-radius: 4px 6px 4px 5px; }
+.gear-in-reserve h3 { color: var(--faint); }
+.settings-footnote { font-size: 10px; }
+.hero-note { font-size: 10px; }
+.bottom-signature { opacity: .8; }
+
+/* The night theme uses matte surfaces and muted ink, without the paper glare. */
+:root[data-theme='dark'] body { background: var(--bg); }
+:root[data-theme='dark'] .panel { border-width: 1.5px; }
+:root[data-theme='dark'] .hero-panel { border-top-color: var(--line-strong); }
+:root[data-theme='dark'] .brand-mark img { border-color: var(--line-strong); filter: brightness(.72) saturate(.55); }
+:root[data-theme='dark'] .hero-decoration { opacity: .65; }
+:root[data-theme='dark'] .hero-decoration img { filter: brightness(.72) saturate(.55); }
+:root[data-theme='dark'] .page-intro h2 em { border-bottom-color: var(--line-strong); }
+:root[data-theme='dark'] .section-eyebrow,
+:root[data-theme='dark'] .stat-icon,
+:root[data-theme='dark'] .gear-item,
+:root[data-theme='dark'] .gear-tile h3,
+:root[data-theme='dark'] .stat-description h3 { color: var(--muted); }
+:root[data-theme='dark'] .gear-tile { border-color: var(--line); box-shadow: none; }
+:root[data-theme='dark'] .step-button,
+:root[data-theme='dark'] .secondary-button,
+:root[data-theme='dark'] .new-game-button { box-shadow: none; }
+:root[data-theme='dark'] .primary-button { color: var(--text); background: #41443a; border-color: var(--line-strong); box-shadow: none; }
+:root[data-theme='dark'] .primary-button:hover { background: #4d5045; }
+:root[data-theme='dark'] .toggle[aria-checked='true']::before { background: #746e5c; border-color: #8c8571; }
+
+@media (min-width: 761px) and (max-width: 850px) {
+  .stat-description h3 { font-size: 17px; }
+}
+
+@media (max-width: 760px) {
+  .app-header { padding-bottom: 11px; }
+  .brand-mark { width: 37px; height: 37px; }
+  .brand h1 { font-size: 27px; }
+  .page-intro h2 { font-size: 34px; }
+  .section-eyebrow h2 { font-size: 19px; }
+  .stat-description h3 { font-size: 18px; }
+  .modal-heading h2 { font-size: 30px; }
+  .gear-tile h3 { font-size: 17px; line-height: 1.3; margin-bottom: 4px; }
+  .gear-item > svg { width: 21px; height: 21px; }
+  .save-status { font-size: 9px; }
+}
+
+@media (max-width: 360px) {
+  .stat-description h3 { font-size: 16px; }
+  .stat-temporaryModifier .stat-description h3 { font-size: 15px; }
+  .brand h1 { font-size: 25px; }
+  .secondary-button { font-size: 10px; padding: 10px; }
+  .quick-equipment-panel { padding-left: 4px; padding-right: 4px; }
+  .gear-tile { padding-left: 2px; padding-right: 2px; }
+}

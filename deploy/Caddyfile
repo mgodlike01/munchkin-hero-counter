@@ -1,0 +1,5 @@
+# Replace hero.example.com with a domain pointing to the VPS.
+hero.example.com {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:8080
+}
